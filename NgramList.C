@@ -4,6 +4,7 @@
 #include <vector>
 #include "WordList.h"
 #include "NgramList.h"
+#include <stdio.h>
 
 using namespace std;
 
@@ -43,7 +44,7 @@ NgramList::~NgramList()
    while (first != NULL)
    {
       nextNgram = first->next;
-      free(first);
+      delete(first);
       first = nextNgram;
    }
 }
@@ -122,6 +123,7 @@ void NgramList::insertNgram(std::string s)
       if (ptr->ngram == s) 
       {
          ptr->count++;
+         delete(newNode);
          return;
       }
       ptr = ptr->next;
