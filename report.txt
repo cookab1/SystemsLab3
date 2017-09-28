@@ -1,0 +1,3 @@
+#Sample data
+total time   NgramList::sortByCount   NgramList::insertNgram   WordList::addWord       Comment
+104.92              97.55                     2.64                    .04            Original code
