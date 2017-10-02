@@ -141,40 +141,9 @@ void NgramList::insertNgram(std::string s)
  */
 void NgramList::sortByCount()
 {
-   Ngram_t * ptr = first;
-   Ngram_t * ptr1;
-   Ngram_t * ptr2;
-   int tcount;
-   string tngram;
-
-   while (ptr != NULL)
-   {
-      ptr1 = first; 
-      ptr2 = ptr1->next;
-      while (ptr2 != NULL) 
-      {
-         if (ptr2->count > ptr1->count)
-         {
-            tcount = ptr1->count;
-            tngram = ptr1->ngram;
-            ptr1->count = ptr2->count;
-            ptr1->ngram = ptr2->ngram; 
-            ptr2->count = tcount;
-            ptr2->ngram = tngram;
-         }
-         ptr1 = ptr2; 
-         ptr2 = ptr2->next;
-      }
-      ptr = ptr->next;
-   }
-}
-
-void NgramList::sortBycount2()
-{
     //Implement merge sort
     std::map<string, int>::iterator it = hashMap.begin();
-    std::vector<Ngram> counts;
-
+    
     while(it != hashMap.end())
     {
         //cout << it->second;
@@ -185,7 +154,7 @@ void NgramList::sortBycount2()
         it++;
     }
 
-    MergeSort(counts, 0, counts.size());    
+    MergeSort(counts, 0, counts.size());
 }
 
 void MergeSort(std::vector<Ngram> counts, int low, int high)
@@ -261,11 +230,10 @@ std::ostream& operator<<(std::ostream& os, const NgramList & nglst)
 {
    cout << "List of " << nglst.ngramSz << " word ngrams and counts\n";
    cout << "--------------------------------\n";
-   NgramList::Ngram_t * ptr = nglst.first;
-   while (ptr != NULL)
+   //NgramList::Ngram_t * ptr = nglst.first;
+   for (int i; counts.at(i) != NULL, i++)
    {
-      cout << ptr->ngram << ", " << ptr->count << endl;
-      ptr = ptr->next;
+      cout << counts.at(i)->ngram << ", " << counts.at(i)->count << endl;
    } 
    return os;
 }

@@ -12,6 +12,7 @@ class NgramList
 
    private:
       Ngram_t * first;
+      std::vector<Ngram> counts;
 
       int ngramSz;
       std::map<std::string,int> hashMap;
@@ -23,7 +24,6 @@ class NgramList
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
-      void sortByCount2();
       void Mergesort(vector<Ngram>, int, int);
       void Merge(vector<Ngram>, int, int, int);
       friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
