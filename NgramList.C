@@ -116,23 +116,22 @@ void NgramList::insertNgram(std::string s)
    Ngram_t * newNode = new Ngram_t();
    newNode->ngram = s;
    newNode->count = 1;
+   std::map<string, int>::iterator it = hashMap.find(s):
 
-   while (ptr != NULL)
+   if (it == hashMap.end())
    {
-      //s already in list
-      if (ptr->ngram == s) 
-      {
-         ptr->count++;
-         delete(newNode);
-         return;
-      }
-      ptr = ptr->next;
+       haspMap.insert(std::map<string,int>::value_type(s, ptr->count);
    }
-   //insert in front of list
-   newNode->next = first;
-   first = newNode;
-}
-
+   else if (it != hashMap.end())
+   {
+       it->second += 1;
+       delete(newNode);
+       return;
+   }
+   else
+   {
+   }
+}   
 
 /*
  * sortByCount
