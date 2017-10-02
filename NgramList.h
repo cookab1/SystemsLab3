@@ -24,6 +24,8 @@ class NgramList
       ~NgramList();
       void sortByCount();
       void sortByCount2();
+      void Mergesort(vector<Ngram>, int, int);
+      void Merge(vector<Ngram>, int, int, int);
       friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
 };
 

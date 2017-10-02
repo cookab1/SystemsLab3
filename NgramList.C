@@ -174,15 +174,78 @@ void NgramList::sortByCount()
 
 void NgramList::sortBycount2()
 {
-    //needs to implement merge sort
+    //Implement merge sort
     std::map<string, int>::iterator it = hashMap.begin();
-    std::vector<int> counts;
+    std::vector<Ngram> counts;
 
     while(it != hashMap.end())
     {
-        cout << it->second;
-        counts.push_back(it->second);
+        //cout << it->second;
+        Ngram next = new Ngram();
+        next.ngram = it->first;
+        next.count = it->second;
+        counts.push_back(next);
         it++;
+    }
+
+    MergeSort(counts, 0, counts.size());    
+}
+
+void MergeSort(std::vector<Ngram> counts, int low, int high)
+{
+    int mid;
+    if(low < high)
+    {
+        mid=(low+high)/2;
+        
+        MergeSort(counts, low, mid);
+        MergeSort(counts, mid+1, high);
+        
+        Merge(counts, low, high, mid); 
+    }
+}
+
+void Merge(std::vector<Ngram> counts, int low, int high, int mid)
+{
+    int i, j, k, 
+    Ngram temp[high-low+1];
+    i = low;
+    k = 0;
+    j = mid + 1;
+
+    while(i <= mid && j <= high)
+    {
+        if(counts.at(i)->count < counts.at(j)->count)
+        {
+            temp[k] = counts.at(i);
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = counts.at(j);
+            k++;
+            j++;
+        }
+    }
+
+    while(i <= mid)
+    {
+        temp[k] = counts.at(i);
+        k++;
+        i++;
+    }
+
+    while(j <= high)
+    {
+        temp[k] = counts.at(j);
+        k++;
+        j++;
+    }
+
+    for(i = low; i <= high; i++)
+    {
+        counts.at(i) = temp[i-low];
     }
 }
 
