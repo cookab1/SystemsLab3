@@ -112,21 +112,18 @@ std::string NgramList::getNextNgram(WordList::const_iterator start,
  */
 void NgramList::insertNgram(std::string s)
 {
-   Ngram_t * ptr = first;
-   Ngram_t * newNode = new Ngram_t();
-   newNode->ngram = s;
-   newNode->count = 1;
    std::map<string, int>::iterator it = hashMap.find(s):
 
    if (it == hashMap.end())
    {
-       haspMap.insert(std::map<string,int>::value_type(s, ptr->count);
+       //Ngram_t * newNode = new Ngram_t();
+       //newNode->ngram = s;
+       //newNode->count = 1;
+       haspMap.insert(std::map<string,int>::value_type(s, 1);
    }
    else if (it != hashMap.end())
    {
        it->second += 1;
-       delete(newNode);
-       return;
    }
    else
    {
