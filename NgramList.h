@@ -21,6 +21,7 @@ class NgramList
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
+      void sortByCount2();
       friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
 };
 

@@ -171,6 +171,22 @@ void NgramList::sortByCount()
    }
 }
 
+void NgramList::sortBycount2()
+{
+    //needs to implement merge sort
+    std::map<string, int>::iterator it = hashMap.begin();
+    std::vector<int> counts;
+
+    while(it != hashMap.end())
+    {
+        cout << it->second;
+        counts.push_back(it->second);
+        it++;
+    }
+}
+
+
+
 /*
  * operator<<
  *
