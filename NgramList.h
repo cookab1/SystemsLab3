@@ -24,7 +24,7 @@ class NgramList
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
-      void Mergesort(vector<Ngram>, int, int);
+      void MergeSort(vector<Ngram>, int, int);
       void Merge(vector<Ngram>, int, int, int);
       friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
 };
