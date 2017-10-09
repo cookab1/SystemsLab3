@@ -1,11 +1,12 @@
 #include <vector>
+#include <map>
 class NgramList 
 {
    struct Ngram
    {
       std::string ngram;
       int count;
-     //struct Ngram * next;
+      struct Ngram * next;
    };
 
    typedef struct Ngram Ngram_t;
@@ -24,8 +25,13 @@ class NgramList
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
+<<<<<<< HEAD
       void MergeSort(vector<Ngram>, int, int);
       void Merge(vector<Ngram>, int, int, int);
+=======
+      void MergeSort(std::vector<Ngram>, int, int);
+      void Merge(std::vector<Ngram>, int, int, int);
+>>>>>>> 123a1202ee886fd6b5df895e63e789a8302afe7b
       friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
 };
 

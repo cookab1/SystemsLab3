@@ -1,4 +1,4 @@
-
+#include <map>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -28,7 +28,8 @@ NgramList::NgramList(int ngramSz, const WordList & wl)
    {
       std::string ngram = getNextNgram(p, wl.end());
       p++;
-      if (!ngram.empty()) insertNgram(ngram);
+      if (!ngram.empty())
+           insertNgram(ngram);
    }
 }
 
@@ -40,13 +41,13 @@ NgramList::NgramList(int ngramSz, const WordList & wl)
  */
 NgramList::~NgramList()
 {
-   Ngram_t * nextNgram;
-   while (first != NULL)
-   {
-      nextNgram = first->next;
-      delete(first);
-      first = nextNgram;
-   }
+   //Ngram_t * nextNgram;
+   //while (first != NULL)
+   //{
+   //   nextNgram = first->next;
+   //   delete(first);
+   //   first = nextNgram;
+  // }
 }
 
 /*
@@ -112,22 +113,12 @@ std::string NgramList::getNextNgram(WordList::const_iterator start,
  */
 void NgramList::insertNgram(std::string s)
 {
-   std::map<string, int>::iterator it = hashMap.find(s):
+   std::map<string, int>::iterator it = hashMap.find(s);
 
    if (it == hashMap.end())
-   {
-       //Ngram_t * newNode = new Ngram_t();
-       //newNode->ngram = s;
-       //newNode->count = 1;
-       haspMap.insert(std::map<string,int>::value_type(s, 1);
-   }
-   else if (it != hashMap.end())
-   {
+       hashMap.insert(std::map<string,int>::value_type(s, 1));
+   if(it != hashMap.end())
        it->second += 1;
-   }
-   else
-   {
-   }
 }   
 
 /*
@@ -147,33 +138,34 @@ void NgramList::sortByCount()
     while(it != hashMap.end())
     {
         //cout << it->second;
-        Ngram next = new Ngram();
+        //Ngram next = new Ngram();
+        Ngram next;
         next.ngram = it->first;
         next.count = it->second;
         counts.push_back(next);
         it++;
     }
 
-    MergeSort(counts, 0, counts.size());
+    NgramList::MergeSort(counts, 0, counts.size());
 }
 
-void MergeSort(std::vector<Ngram> counts, int low, int high)
+void NgramList::MergeSort(std::vector<NgramList::Ngram> counts, int low, int high)
 {
     int mid;
     if(low < high)
     {
         mid=(low+high)/2;
         
-        MergeSort(counts, low, mid);
-        MergeSort(counts, mid+1, high);
+        NgramList::MergeSort(counts, low, mid);
+        NgramList::MergeSort(counts, mid+1, high);
         
-        Merge(counts, low, high, mid); 
+        NgramList::Merge(counts, low, high, mid); 
     }
 }
 
-void Merge(std::vector<Ngram> counts, int low, int high, int mid)
+void NgramList::Merge(std::vector<Ngram> counts, int low, int high, int mid)
 {
-    int i, j, k, 
+    int i, j, k; 
     Ngram temp[high-low+1];
     i = low;
     k = 0;
@@ -181,7 +173,7 @@ void Merge(std::vector<Ngram> counts, int low, int high, int mid)
 
     while(i <= mid && j <= high)
     {
-        if(counts.at(i)->count < counts.at(j)->count)
+        if(counts.at(i).count < counts.at(j).count)
         {
             temp[k] = counts.at(i);
             k++;
@@ -231,9 +223,10 @@ std::ostream& operator<<(std::ostream& os, const NgramList & nglst)
    cout << "List of " << nglst.ngramSz << " word ngrams and counts\n";
    cout << "--------------------------------\n";
    //NgramList::Ngram_t * ptr = nglst.first;
-   for (int i; counts.at(i) != NULL, i++)
+   vector<NgramList::Ngram> const *counts = &(nglst.counts);
+   for (std::vector<NgramList::Ngram>::size_type i = 0; i != nglst.counts.size(); i++)
    {
-      cout << counts.at(i)->ngram << ", " << counts.at(i)->count << endl;
+      cout << counts->at(i).ngram << ", " << counts->at(i).count << endl;
    } 
    return os;
 }
