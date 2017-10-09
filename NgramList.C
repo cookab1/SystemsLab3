@@ -44,16 +44,19 @@ NgramList::NgramList(int ngramSz, const WordList & wl)
    //uses built in sort that should be O(nlogn)
    
    //std::sort(NgramList::counts.begin(), NgramList::counts.end(), NgramList::CompareCount());
-   
+
+   std::cout << "COUNTS SIZE: " << counts.size() << "\n";  
    NgramList::sortVector();
+   //std::cout << "COUNTS SIZE: " << counts.size();
 
    //Print the sorted Ngrams 
-   /*    
+    /*   
    for (int i = 0; i < NgramList::counts.size(); i++)
    {
        std::cout << "STRING: " << NgramList::counts[i]->ngram << " COUNT: " << NgramList::counts[i]->count << "\n";
    }
    */
+   
 }  
 
 /*
@@ -72,7 +75,12 @@ NgramList::~NgramList()
       first = nextNgram;
     }
 }
-
+/*
+bool NgramList::compareCount(Ngram_t &x, Ngram_t &y)
+{
+    return x.count >= y.count;
+}
+*/
 void NgramList::sortVector()
 {
     std::sort(NgramList::counts.begin(), NgramList::counts.end(), NgramList::CompareCount());
@@ -179,9 +187,10 @@ void NgramList::insertNgram(std::string s)
 /*
  * populates a vector with the ngrams from the unordered_map
  */
-void NgramList::populateVector(vector<Ngram_t*> & counts)
+void NgramList::populateVector(vector<Ngram_t*> counts)
 {
     NgramList::it = hashMap.begin();
+    //std::cout << "Word: " << it->first << " Value: " << it->second << "\n";
     while(it != hashMap.end())
     {
         Ngram_t * newNode = new Ngram_t();
@@ -191,6 +200,7 @@ void NgramList::populateVector(vector<Ngram_t*> & counts)
         counts.push_back(newNode);
         it++;
     }
+    cout << "COUNT SIZE: " << counts.size() << "\n";
 }
 /*
  * sortByCount
