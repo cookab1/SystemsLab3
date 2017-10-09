@@ -14,21 +14,22 @@ class NgramList
       struct Ngram * next;
 
    };
+   typedef struct Ngram Ngram_t;
+   
    struct CompareCount
    {
-       bool operator()(const Ngram& x, const Ngram& y) const
+       bool operator()(const Ngram_t* x, const Ngram_t* y) const
        {
-           return x.count >= y.count;
+           return x->count >= y->count;
        }
    };
 
-   typedef struct Ngram Ngram_t;
 
    private:
       //added variables
-      std::unordered_map<std::string, int>::iterator it;
-      std::vector<Ngram> counts;
-      std::unordered_map<std::string, int> hashMap;
+      //std::unordered_map<std::string, int>::iterator it;
+      //std::vector<Ngram> counts;
+      //std::unordered_map<std::string, int> hashMap;
 
 
       Ngram_t * first;
@@ -38,14 +39,18 @@ class NgramList
                                WordList::const_iterator end);
        
    public:
+      std::unordered_map<std::string, int>::iterator it;
+      std::vector<Ngram_t*> counts;
+      std::unordered_map<std::string, int> hashMap;
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
 
       //added functions
-      void mergeSort(std::vector<Ngram> &, int, int);
-      void merge(std::vector<Ngram> &, int, int ,int);
-      void populateVector(std::vector<Ngram> & counts);
+      //void mergeSort(std::vector<Ngram_t> &, int, int);
+      //void merge(std::vector<Ngram_t> &, int, int ,int);
+      void populateVector(std::vector<Ngram_t*> & counts);
+      void sortVector();
       //template<typename I>
       //void mergeSort(I begin, I end);
       //template<typename I>
