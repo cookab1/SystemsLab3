@@ -1,3 +1,40 @@
-#Sample data
-total time   NgramList::sortByCount   NgramList::insertNgram   WordList::addWord       Comment
-104.92              97.55                     2.64                    .04            Original code
+Attempt 1: Placed each Ngram into a unordered_map in O(1) time. Iterated over the unordered_map to put 
+the Ngram’s into a Vector of Ngrams. Called the sort function from #include<algorithm> on our Vector 
+of Ngrams to get the following runtime.
+
+Total time: 18.08
+void std::__unguarded_linear_insert: 4.83
+__gnu_cxx::__normal_iterator>>::operator*(): 4.08
+NgramList::CompareCount::operator() : 2.97
+__gnu_cxx::__normal_iterator::operator--():  2.39
+NgramList::Ngram::operator=(NgramList::Ngram const&):  2.37
+void std::partial_sort: 0.52
+__gnu_cxx::new_allocator<NgramList::Ngram>: 0.23
+__gnu_cxx::__normal_iterator<NgramList::Ngram*: 0.17
+std::__lg(long): 0.07
+bool __gnu_cxx::operator: 0.05
+
+Attempt 2: Instead of sorting the Ngram’s themselves, we are now sorting on the pointers of ngrams. 
+Andy, and I did not think that sorting these small structs would slow down a C++ program as much as 
+it did.
+
+Total time: 0.41
+NgramList::getNextNgram: 0.05
+std::__detail::_Mod_range_hashing::operator(): 0.03
+void std::_Construct<std::string, std::string>: 0.03
+__gnu_cxx::__normal_iterator: 0.02
+std::string* std::__uninitialized_copy: 0.02
+__gnu_cxx::__normal_iterator: 0.02
+
+Attempt 3: Turned on the “-Ofast” compiler optimization flag.
+
+Total time: 0.15
+NgramList::getNextNgram: 0.02
+NgramList::Compare::operator(): 0.01
+std::move_iterator: 0.01
+__gnu_cxx::__normal_iterator: 0.01
+bool __gnu_cxx::operator: 0.01
+void std::iter_swap: 0.01
+bool std::operator==<: 0.01
+std::__detail::_Hash_code_base: 0.01
+

@@ -1,7 +1,7 @@
 CC = g++ 
 CFLAGS = -g -pg -c -std=c++0x
 OBJS = NgramList.o WordList.o main.o
-LFLAGS = -pg 
+LFLAGS = -pg -Ofast 
 
 .C.o:
 	$(CC) $(CFLAGS) $< -o $@

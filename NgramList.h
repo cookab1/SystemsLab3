@@ -11,7 +11,7 @@ class NgramList
    {
       std::string ngram;
       int count;
-      struct Ngram * next;
+      //struct Ngram * next;
 
    };
    typedef struct Ngram Ngram_t;
@@ -20,20 +20,14 @@ class NgramList
    {
        bool operator()(const Ngram_t *x, const Ngram_t *y)
        {
-           return x->count < y->count;
+           return x->count > y->count;
        }
    };
    typedef struct Compare CompareCount;
    
 
    private:
-      //added variables
-      //std::unordered_map<std::string, int>::iterator it;
-      //std::vector<Ngram> counts;
-      //std::unordered_map<std::string, int> hashMap;
-
-
-      Ngram_t * first;
+      //Ngram_t * first;
       int ngramSz;
       void insertNgram(std::string s);
       std::string getNextNgram(WordList::const_iterator start, 
@@ -46,13 +40,7 @@ class NgramList
       NgramList(int ngramSz, const WordList & wl);
       ~NgramList();
       void sortByCount();
-      //added functions
-      //void mergeSort(std::vector<Ngram_t> &, int, int);
-      //void merge(std::vector<Ngram_t> &, int, int ,int);
       void populateVector(std::vector<Ngram_t*> & counts);
       void sortVector();
-      
-      //bool compareByNumber(const Ngram, const Ngram); 
-
-      friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
+      //friend std::ostream& operator<<(std::ostream& os, const NgramList & nl);
 };
