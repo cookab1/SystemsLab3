@@ -18,9 +18,9 @@ class NgramList
    
    struct Compare
    {
-       bool operator()(Ngram_t* x, Ngram_t* y)
+       bool operator()(const Ngram_t *x, const Ngram_t *y)
        {
-           return x->count >= y->count;
+           return x->count < y->count;
        }
    };
    typedef struct Compare CompareCount;
@@ -50,13 +50,8 @@ class NgramList
       //added functions
       //void mergeSort(std::vector<Ngram_t> &, int, int);
       //void merge(std::vector<Ngram_t> &, int, int ,int);
-      void populateVector(std::vector<Ngram_t*> counts);
+      void populateVector(std::vector<Ngram_t*> & counts);
       void sortVector();
-      //static bool compareCount(Ngram_t &a, Ngram_t &b);
-      //template<typename I>
-      //void mergeSort(I begin, I end);
-      //template<typename I>
-      //void merge(I begin, I midPoint, I end);
       
       //bool compareByNumber(const Ngram, const Ngram); 
 
